@@ -4,7 +4,7 @@ import { toArray } from 'phosphor/lib/algorithm/iteration';
 import { findLastIndex } from 'phosphor/lib/algorithm/searching';
 import { OutputRenderer } from './output';
 import { DocWidgetFactory } from './doc';
-import './index.css';
+// import './index.css';
 
 /**
  * Activate the extension.

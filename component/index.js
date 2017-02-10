@@ -1,13 +1,6 @@
 import React from 'react';
-import {
-  Table, 
-  Column, 
-  Cell
-} from 'fixed-data-table';
-import 'fixed-data-table/dist/fixed-data-table.min.css';
-import './index.css';
-
-const ROW_HEIGHT = 34;
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
 
 export default class JSONTable extends React.Component {
     
@@ -15,43 +8,25 @@ export default class JSONTable extends React.Component {
     columnWidths: {}
   }
 
+  on
+
   render() {
     const { schema, data, ...options } = this.props;
+    /*
+    console.error("UFO", this.props, data);
+    for(var i = 0; i < data.length; i++) {
+      data[i]["id"] = i;
+    }
+    */
     return (
-      <Table
-        rowHeight={ROW_HEIGHT}
-        headerHeight={ROW_HEIGHT}
-        rowsCount={data.length}
-        width={3000}
-        height={ROW_HEIGHT * (data.length + 1)}
-        onColumnResizeEndCallback={(columnWidth, columnKey) => {
-          this.setState(({columnWidths}) => ({
-            columnWidths: {
-              ...columnWidths,
-              [columnKey]: columnWidth,
-            }
-          }));
-        }}
-        {...options}
-      >
+      <BootstrapTable data={ data } striped hover bordered>
+        <TableHeaderColumn dataField='id' isKey autoValue disableSort={ false } hidden>ID</TableHeaderColumn>
         {
-            schema.fields.map((field, fieldIndex) =>
-            <Column
-              key={fieldIndex}
-              columnKey={field.name}
-              header={(props) =>
-                <Cell>{field.name}</Cell>
-              }
-              cell={(props) =>
-                <Cell>{data[props.rowIndex][field.name]}</Cell>
-              }
-              width={this.state.columnWidths[field.name] || 300}
-              fixed={false}
-              isResizable={true}
-            />
-          )
+          schema.fields.map(function(field) {
+            return <TableHeaderColumn dataField={ field.name } disableSort={ false } dataSort>{ field.name }</TableHeaderColumn>;
+          })
         }
-      </Table>
+      </BootstrapTable>
     );
   }
 

@@ -2,7 +2,8 @@ import { Widget } from 'phosphor/lib/ui/widget';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import JSONTable from 'react-json-table';
-
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
 /**
  * The class name added to this OutputWidget.
  */
@@ -16,7 +17,7 @@ export class OutputWidget extends Widget {
 
   constructor(options) {
     super();
-    this.addClass(CLASS_NAME);
+    //this.addClass(CLASS_NAME);
     this._source = options.source;
   }
 
